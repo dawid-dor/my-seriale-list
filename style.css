@@ -1,0 +1,41 @@
+ul{
+    list-style:none;
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+}
+td img{
+    width: 70px;
+    height: 100px;
+    margin: 0;
+    padding: 0;
+}
+
+.logo-container{
+    background: url("img/banner.jpg") center fixed no-repeat;
+    background-size: cover;
+}
+
+
+.delete-cross{
+    margin: 0;
+    padding: 0;
+}
+.delete-cross:hover{
+    cursor: pointer;
+    color: red;
+    transition: 0.2s ease-in-out;
+}
+
+.number-up:hover{
+    cursor: pointer;
+    color: greenyellow;
+    transition: 0.2s ease-in-out;
+}
+
+.number-down:hover{
+    cursor: pointer;
+    color: red;
+    transition: 0.2s ease-in-out;
+}

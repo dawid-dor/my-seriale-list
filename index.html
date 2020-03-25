@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <!-- Main Container starts here -->
+    <div class="container">
+        <nav class="navbar">
+            <a href="#" class="navbar-brand">MySerialeList</a>
+            <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal"">Add serial to the list</button>
+            <h6 class="pt-2">Viewing <strong>Your</strong> Seriale List</h6>
+        </nav>
+
+
+        <!-- Add serial modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Add serial</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Serial's name goes here" id="add-serial-input">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-success" id="add-serial-button">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <!-- Add serial ends here -->
+
+        <!-- Content Starts Here -->
+        <div class="container content">
+            <div class="logo-container border mb-4">
+                <div class="logo text-center p-5">
+                    <h6 class="text-muted font-weight-bold">Organize, Remember, Discover</h6>
+                    <h1 class="display-3 p-3">MySerialeList</h1>
+                    <h4>HOW MUCH SERIALI HAVE YOU SEEN</h4>
+                </div>
+
+                <ul class="list-category-filters bg-light mb-0 p-2 sticky-top">
+                    <li><a href="#"><strong>All Seriale</strong></a></li>
+                    <li><a href="#"><strong>Currently Watching</strong></a></li>
+                    <li><a href="#"><strong>Completed</strong></a></li>
+                    <li><a href="#"><strong>On Hold</strong></a></li>
+                    <li><a href="#"><strong>Dropped</strong></a></li>
+                    <li><a href="#"><strong>Plan to Watch</strong></a></li>
+                </ul>
+            </div>
+            
+            
+                <div>
+                    <h3 class="text-center bg-white mb-0 p-2 text-success" id="category">ALL SERIALE</h3>
+                </div>
+
+                <table class="table table-striped table-light table-hover ">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col" id="id">#</th>
+                            <th scope="col">Image</th>
+                            <th scope="col" id="serial-title">Serial Title</th>
+                            <th scope="col" id="score">Score</th>
+                            <th scope="col">Episodes</th>
+                            <th scope="col">Seasons</th>
+                            <th scope="col" id="status">Status</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="seriale-list">
+                        <tr> <!-- Injected from API--> </tr>                      
+                    </tbody>
+                </table>
+           
+        </div>
+        <!-- Content ends here -->
+    </div>
+    <!-- Main Container ends here -->
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- My JS -->
+    <script src="api.js"></script>
+    <script src="list.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
