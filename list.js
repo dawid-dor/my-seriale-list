@@ -46,12 +46,12 @@ class SerialeList{
         // Episodes
         episodes.innerHTML = `<p><a href="#" id="user-episodes-${this.id}">${this.userEpisodes}</a>/${this.episodes}</p>
                                 <br>
-                                <i class="fa fa-arrow-circle-o-up text-success number-up" id="user-episodes-up-${this.id}"></i> / <i class="fa fa-arrow-circle-o-down text-danger number-down" id="user-episodes-down-${this.id}"></i>`
+                                <i class="fa fa-arrow-circle-o-up text-success number-up mr-1" id="user-episodes-up-${this.id}"></i><i class="fa fa-arrow-circle-o-down text-danger number-down" id="user-episodes-down-${this.id}"></i>`
 
         // Seasons
         seasons.innerHTML = `<p><a href="#" id="user-seasons-${this.id}">${this.userSeasons}</a>/${this.seasons}</p>
                                 <br>
-                                <i class="fa fa-arrow-circle-o-up text-success number-up" id="user-seasons-up-${this.id}"></i> / <i class="fa fa-arrow-circle-o-down text-danger number-down" id="user-seasons-down-${this.id}"></i>`
+                                <i class="fa fa-arrow-circle-o-up text-success number-up mr-1" id="user-seasons-up-${this.id}"></i><i class="fa fa-arrow-circle-o-down text-danger number-down" id="user-seasons-down-${this.id}"></i>`
 
         // Watch Status
         status.innerHTML = `<a href="#" id="status-${this.id}" class="text-info">${this.status}</a>`
@@ -79,5 +79,44 @@ class SerialeList{
         
         // Appending to seriale list
         document.getElementById('seriale-list').appendChild(rowBody);
+    }
+
+    episodeUpDown(){
+        const buttonUp = document.getElementById(`user-episodes-up-${this.id}`);
+        const buttonDown = document.getElementById(`user-episodes-down-${this.id}`);
+        let episode = this.userEpisodes;
+
+        buttonUp.addEventListener('click', () => {
+            if(episode < this.episodes)
+            episode +=1;
+
+            document.getElementById(`user-episodes-${this.id}`).textContent = `${episode}`;
+        });
+
+        buttonDown.addEventListener('click', () => {
+            if(episode > 0)
+            episode -=1;
+            document.getElementById(`user-episodes-${this.id}`).textContent = `${episode}`;
+        })
+    }
+
+    seasonUpDown(){
+        const seasonUp = document.getElementById(`user-seasons-up-${this.id}`);
+        const seasonDown = document.getElementById(`user-seasons-down-${this.id}`);
+        let season = this.userSeasons;
+
+        seasonUp.addEventListener('click', () => {
+            if(season < this.seasons)
+            season +=1;
+
+            document.getElementById(`user-seasons-${this.id}`).textContent = `${season}`;
+        });
+
+        seasonDown.addEventListener('click', () => {
+            if(season > 0)
+            season -=1;
+
+            document.getElementById(`user-seasons-${this.id}`).textContent = `${season}`;
+        })
     }
 }

@@ -56,6 +56,8 @@ function readFromMemory(){
         serialeMemory.push(element);
         let serialInMemory = new SerialeList(element.pos, element.img, element.name, element.score, element.userEpisodes, element.episodes,element.userSeasons, element.seasons, element.status, element.id);
         serialInMemory.inject();
+        serialInMemory.episodeUpDown();
+        serialInMemory.seasonUpDown();
     });
     deleteSerialRow();
 }
@@ -65,11 +67,12 @@ function readFromMemory(){
 function deleteSerialRow(){
     const data = JSON.parse(localStorage.getItem('seriale'));
     const IDs = data.map(element => element.id);
-    // IDs.forEach(id => document.getElementById(`delete-${id}`)).addEventListener('click', console.log(123));
+
     for(let i = 0; i< IDs.length; i++){
         document.getElementById(`delete-${IDs[i]}`).addEventListener('click', () => {
             const currentRow = document.getElementById(`serial-${IDs[i]}`)
             currentRow.parentNode.removeChild(currentRow);
+
             const idToDelete = data.filter(element => element.id === IDs[i]).map(element => element.id).reduce((last, current) => last + current);
             const index = IDs.indexOf(idToDelete);
             data.splice(index, 1);
