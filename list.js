@@ -91,12 +91,14 @@ class SerialeList{
             episode +=1;
 
             document.getElementById(`user-episodes-${this.id}`).textContent = `${episode}`;
+            this.updateEpisodes(this.id, episode);
         });
 
         buttonDown.addEventListener('click', () => {
             if(episode > 0)
             episode -=1;
             document.getElementById(`user-episodes-${this.id}`).textContent = `${episode}`;
+            this.updateEpisodes(this.id, episode);
         })
     }
 
@@ -110,6 +112,7 @@ class SerialeList{
             season +=1;
 
             document.getElementById(`user-seasons-${this.id}`).textContent = `${season}`;
+            this.updateSeasons(this.id, season);
         });
 
         seasonDown.addEventListener('click', () => {
@@ -117,6 +120,29 @@ class SerialeList{
             season -=1;
 
             document.getElementById(`user-seasons-${this.id}`).textContent = `${season}`;
+            this.updateSeasons(this.id, season);
         })
+    }
+
+    updateSeasons(id, changeValue){
+        const data = JSON.parse(localStorage.getItem('seriale'));
+        const filter = data.filter(element => element.id === id);
+        filter[0].userSeasons = changeValue;
+        for(let i = 0; i< serialeMemory.length; i++){
+            if(serialeMemory[i].id === filter[0].id) serialeMemory[i].userSeasons = changeValue;
+        }
+        localStorage.setItem('seriale', JSON.stringify(serialeMemory));
+        
+    }
+
+    updateEpisodes(id, changeValue){
+        const data = JSON.parse(localStorage.getItem('seriale'));
+        const filter = data.filter(element => element.id === id);
+        filter[0].userEpisodes = changeValue;
+        for(let i = 0; i< serialeMemory.length; i++){
+            if(serialeMemory[i].id === filter[0].id) serialeMemory[i].userEpisodes = changeValue;
+        }
+        localStorage.setItem('seriale', JSON.stringify(serialeMemory));
+        
     }
 }
