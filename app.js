@@ -30,8 +30,6 @@ addSerialBtn.addEventListener('click', () => {
                 serialeMemory.push(newSerial);
                 localStorage.setItem('seriale', JSON.stringify(serialeMemory));
                 newSerial.inject();
-                newSerial.episodeUpDown();
-                newSerial.seasonUpDown();
 
                 // Delete Button
                 document.getElementById(`delete-${serialID}`).addEventListener('click', () => {
@@ -58,8 +56,6 @@ function readFromMemory(){
         serialeMemory.push(element);
         let serialInMemory = new SerialeList(element.pos, element.img, element.name, element.score, element.userEpisodes, element.episodes,element.userSeasons, element.seasons, element.status, element.id);
         serialInMemory.inject(); //Creates list from class
-        serialInMemory.episodeUpDown(); //Gives functionality to episodes buttons
-        serialInMemory.seasonUpDown(); //Give functionality to seasons buttons
     });
     deleteSerialRow(); //method to delete the whole row from list and from local storage
 }

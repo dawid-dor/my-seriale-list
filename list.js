@@ -33,7 +33,9 @@ class SerialeList{
 
 
         // Text Nodes
+        watchStatus.setAttribute('id', `serial-color-${this.id}`)
         watchStatus.classList.add('bg-info');
+
         serialNumber.appendChild(document.createTextNode(`${this.pos}`));
         coverRow.appendChild(cover);
 
@@ -66,6 +68,9 @@ class SerialeList{
         // Row Body
         rowBody.setAttribute('id', `serial-${this.id}`);
 
+        // Append hidden status select window to status row
+        this.statusList(status);
+
         // Appending to row body
         rowBody.appendChild(watchStatus);
         rowBody.appendChild(serialNumber);
@@ -79,6 +84,140 @@ class SerialeList{
         
         // Appending to seriale list
         document.getElementById('seriale-list').appendChild(rowBody);
+
+        // Makes episode and season buttons interactable and saves them in Local Storage
+        this.episodeUpDown();
+        this.seasonUpDown();
+
+        // Makes status changable
+        this.setStatus();
+        // Color Status
+        this.colorStatus(this.status);
+    }
+
+    colorStatus(changeValue){
+        const statusColor = document.getElementById(`serial-color-${this.id}`);
+        const status = document.getElementById(`status-${this.id}`);
+    
+        switch(changeValue){
+            case "Completed":
+                statusColor.className = 'bg-success';
+                status.className = 'text-success';
+                break;
+            case "Watching":
+                statusColor.className = 'bg-info';
+                status.className = 'text-info';
+                break;
+            case "Plan To Watch":
+                statusColor.className = 'bg-secondary';
+                status.className = 'text-secondary';
+                break;
+            case "Dropped":
+                statusColor.className = 'bg-danger';
+                status.className = 'text-danger';
+                break;
+        }
+    }
+
+    setStatus(){
+        const status = document.getElementById(`status-${this.id}`);
+        const statusList = document.getElementById(`status-list-${this.id}`);
+        status.addEventListener('click', () => {
+            status.style.display="none";
+            statusList.style.display="block";
+            statusList.addEventListener('input', (e) => {
+                const statusColor = document.getElementById(`serial-color-${this.id}`);
+                if(e.target.value === "Completed") {
+                    statusColor.className = '';
+                    statusColor.classList.add('bg-success');
+
+                    this.updateStatus(this.id, "Completed");
+
+                    status.textContent = "Completed";
+                    status.className = '';
+                    status.classList.add('text-success');
+
+                    status.style.display="block";
+                    statusList.style.display="none";
+                }
+
+                if(e.target.value === "Watching") {
+                    statusColor.className = '';
+                    statusColor.classList.add('bg-info');
+
+                    this.updateStatus(this.id, "Watching");
+
+                    status.textContent = "Watching";
+                    status.className = '';
+                    status.classList.add('text-info');
+
+                    status.style.display="block";
+                    statusList.style.display="none";
+                }
+
+                if(e.target.value === "Plan To Watch") {
+                    statusColor.className = '';
+                    statusColor.classList.add('bg-secondary');
+
+                    this.updateStatus(this.id, "Plan To Watch");
+
+                    status.textContent = "Plan To Watch";
+                    status.className = '';
+                    status.classList.add('text-secondary');
+
+                    status.style.display="block";
+                    statusList.style.display="none";
+                }
+
+                if(e.target.value === "Dropped") {
+                    statusColor.className = '';
+                    statusColor.classList.add('bg-danger');
+
+                    this.updateStatus(this.id, "Dropped");
+
+                    status.textContent = "Dropped";
+                    status.className = '';
+                    status.classList.add('text-danger');
+
+                    status.style.display="block";
+                    statusList.style.display="none";
+                }
+
+                
+
+            })
+
+        });
+
+    }
+
+    statusList(table){
+        const status = document.createElement("select");
+        status.setAttribute("id", `status-list-${this.id}`);
+        status.classList.add('mdb-select', 'custom-select', 'mr-n5');
+        status.style.display = "none";
+
+        const watching = document.createElement("option");
+        const completed = document.createElement("option");
+        const dropped = document.createElement("option");
+        const planToWatch = document.createElement("option");
+
+        watching.value = "Watching";
+        completed.value = "Completed";
+        dropped.value = "Dropped";
+        planToWatch.value = "Plan To Watch";
+
+        watching.text = "Watching";
+        completed.text = "Completed";
+        dropped.text = "Dropped";
+        planToWatch.text = "Plan To Watch";
+
+        status.appendChild(watching);
+        status.appendChild(completed);
+        status.appendChild(dropped);
+        status.appendChild(planToWatch);
+
+        table.appendChild(status);
     }
 
     episodeUpDown(){
@@ -145,4 +284,20 @@ class SerialeList{
         localStorage.setItem('seriale', JSON.stringify(serialeMemory));
         
     }
+
+    updateStatus(id, changeValue){
+        const data = JSON.parse(localStorage.getItem('seriale'));
+        const filter = data.filter(element => element.id === id);
+        filter[0].status = changeValue;
+        for(let i = 0; i< serialeMemory.length; i++){
+            if(serialeMemory[i].id === filter[0].id) {
+                serialeMemory[i].status = changeValue
+                
+            };
+        }
+        localStorage.setItem('seriale', JSON.stringify(serialeMemory));
+    }
 }
+
+
+
