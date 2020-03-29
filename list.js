@@ -197,21 +197,25 @@ class SerialeList{
         status.classList.add('mdb-select', 'custom-select', 'mr-n5');
         status.style.display = "none";
 
+        const defaultOption = document.createElement("option");
         const watching = document.createElement("option");
         const completed = document.createElement("option");
         const dropped = document.createElement("option");
         const planToWatch = document.createElement("option");
 
+        defaultOption.value = "Default";
         watching.value = "Watching";
         completed.value = "Completed";
         dropped.value = "Dropped";
         planToWatch.value = "Plan To Watch";
 
+        defaultOption.text = "Select status..."
         watching.text = "Watching";
         completed.text = "Completed";
         dropped.text = "Dropped";
         planToWatch.text = "Plan To Watch";
 
+        status.appendChild(defaultOption);
         status.appendChild(watching);
         status.appendChild(completed);
         status.appendChild(dropped);
