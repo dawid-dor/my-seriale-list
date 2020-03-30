@@ -71,6 +71,9 @@ class SerialeList{
         // Append hidden status select window to status row
         this.statusList(status);
 
+        // Append hidden score select window to score row
+        this.scoreList(userScore);
+
         // Appending to row body
         rowBody.appendChild(watchStatus);
         rowBody.appendChild(serialNumber);
@@ -93,6 +96,10 @@ class SerialeList{
         this.setStatus();
         // Color Status
         this.colorStatus(this.status);
+
+        // Makes score changable;
+        this.setScore();
+        
     }
 
     colorStatus(changeValue){
@@ -117,6 +124,21 @@ class SerialeList{
                 status.className = 'text-danger';
                 break;
         }
+    }
+
+    setScore(){
+        const score = document.getElementById(`user-score-${this.id}`);
+        const scoreList = document.getElementById(`score-list-${this.id}`);
+        score.addEventListener('click', () => {
+            score.style.display = "none";
+            scoreList.style.display="block";
+            scoreList.addEventListener('input', (e) => {
+                score.textContent = e.target.value;
+                this.updateScore(this.id, e.target.value);
+                score.style.display="block";
+                scoreList.style.display="none";
+            })
+        })
     }
 
     setStatus(){
@@ -189,6 +211,26 @@ class SerialeList{
 
         });
 
+    }
+    
+    scoreList(table){
+        const scoreList = document.createElement("select");
+        scoreList.setAttribute("id", `score-list-${this.id}`);
+        scoreList.classList.add('mdb-select', 'custom-select', 'mr-n5');
+        scoreList.style.display = "none";
+
+        let lorem = document.createElement("option");
+        lorem.value = "default";
+        lorem.text = ""
+        scoreList.appendChild(lorem);
+        for(let i = 1; i <= 10; i++){
+            let score = document.createElement("option");
+            score.value = i;
+            score.text = `${i}`;
+            scoreList.appendChild(score);
+        }
+
+        table.appendChild(scoreList);
     }
 
     statusList(table){
@@ -296,6 +338,19 @@ class SerialeList{
         for(let i = 0; i< serialeMemory.length; i++){
             if(serialeMemory[i].id === filter[0].id) {
                 serialeMemory[i].status = changeValue
+                
+            };
+        }
+        localStorage.setItem('seriale', JSON.stringify(serialeMemory));
+    }
+
+    updateScore(id, changeValue){
+        const data = JSON.parse(localStorage.getItem('seriale'));
+        const filter = data.filter(element => element.id === id);
+        filter[0].score = changeValue;
+        for(let i = 0; i< serialeMemory.length; i++){
+            if(serialeMemory[i].id === filter[0].id) {
+                serialeMemory[i].score = changeValue
                 
             };
         }
