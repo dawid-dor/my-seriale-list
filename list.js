@@ -67,6 +67,7 @@ class SerialeList{
 
         // Row Body
         rowBody.setAttribute('id', `serial-${this.id}`);
+        rowBody.setAttribute('class', 'serial-row');
 
         // Append hidden status select window to status row
         this.statusList(status);
@@ -122,6 +123,10 @@ class SerialeList{
             case "Dropped":
                 statusColor.className = 'bg-danger';
                 status.className = 'text-danger';
+                break;
+            case "On Hold":
+                statusColor.className = 'bg-warning';
+                status.className = 'text-warning';
                 break;
         }
     }
@@ -205,6 +210,20 @@ class SerialeList{
                     statusList.style.display="none";
                 }
 
+                if(e.target.value === "On Hold") {
+                    statusColor.className = '';
+                    statusColor.classList.add('bg-warning');
+
+                    this.updateStatus(this.id, "On Hold");
+
+                    status.textContent = "On Hold";
+                    status.className = '';
+                    status.classList.add('text-warning');
+
+                    status.style.display="block";
+                    statusList.style.display="none";
+                }
+
                 
 
             })
@@ -243,24 +262,28 @@ class SerialeList{
         const watching = document.createElement("option");
         const completed = document.createElement("option");
         const dropped = document.createElement("option");
+        const onHold = document.createElement("option");
         const planToWatch = document.createElement("option");
 
         defaultOption.value = "Default";
         watching.value = "Watching";
         completed.value = "Completed";
         dropped.value = "Dropped";
+        onHold.value = "On Hold";
         planToWatch.value = "Plan To Watch";
 
         defaultOption.text = "Select status..."
         watching.text = "Watching";
         completed.text = "Completed";
         dropped.text = "Dropped";
+        onHold.text = "On Hold";
         planToWatch.text = "Plan To Watch";
 
         status.appendChild(defaultOption);
         status.appendChild(watching);
         status.appendChild(completed);
         status.appendChild(dropped);
+        status.appendChild(onHold);
         status.appendChild(planToWatch);
 
         table.appendChild(status);
