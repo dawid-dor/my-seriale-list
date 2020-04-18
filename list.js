@@ -43,15 +43,15 @@ class SerialeList{
         serialName.appendChild(document.createTextNode(`${this.name}`));
 
         // User Score
-        userScore.innerHTML = `<a href="#" class="font-weight-bold text-primary" id="user-score-${this.id}">${this.score}</a>`
+        userScore.innerHTML = `<a href="javascript::" class="font-weight-bold text-primary" id="user-score-${this.id}">${this.score}</a>`
 
         // Episodes
-        episodes.innerHTML = `<p><a href="#" id="user-episodes-${this.id}">${this.userEpisodes}</a>/${this.episodes}</p>
+        episodes.innerHTML = `<p><a href="javascript::" id="user-episodes-${this.id}">${this.userEpisodes}</a>/${this.episodes}</p>
                                 <br>
                                 <i class="fa fa-arrow-circle-o-up text-success number-up mr-1" id="user-episodes-up-${this.id}"></i><i class="fa fa-arrow-circle-o-down text-danger number-down" id="user-episodes-down-${this.id}"></i>`
 
         // Seasons
-        seasons.innerHTML = `<p><a href="#" id="user-seasons-${this.id}">${this.userSeasons}</a>/${this.seasons}</p>
+        seasons.innerHTML = `<p><a href="javascript::" id="user-seasons-${this.id}">${this.userSeasons}</a>/${this.seasons}</p>
                                 <br>
                                 <i class="fa fa-arrow-circle-o-up text-success number-up mr-1" id="user-seasons-up-${this.id}"></i><i class="fa fa-arrow-circle-o-down text-danger number-down" id="user-seasons-down-${this.id}"></i>`
 
@@ -103,6 +103,7 @@ class SerialeList{
         
     }
 
+    // Change color depending on the status - watching, completed etc.
     colorStatus(changeValue){
         const statusColor = document.getElementById(`serial-color-${this.id}`);
         const status = document.getElementById(`status-${this.id}`);
@@ -131,6 +132,7 @@ class SerialeList{
         }
     }
 
+    // Change score by clicking on it
     setScore(){
         const score = document.getElementById(`user-score-${this.id}`);
         const scoreList = document.getElementById(`score-list-${this.id}`);
@@ -146,6 +148,7 @@ class SerialeList{
         })
     }
 
+    // Change status by clicking on it
     setStatus(){
         const status = document.getElementById(`status-${this.id}`);
         const statusList = document.getElementById(`status-list-${this.id}`);
@@ -232,6 +235,7 @@ class SerialeList{
 
     }
     
+    // Function that appends a hidden select table to make score changable
     scoreList(table){
         const scoreList = document.createElement("select");
         scoreList.setAttribute("id", `score-list-${this.id}`);
@@ -252,6 +256,7 @@ class SerialeList{
         table.appendChild(scoreList);
     }
 
+    // Function that appends a hidden select table to make status changable
     statusList(table){
         const status = document.createElement("select");
         status.setAttribute("id", `status-list-${this.id}`);
@@ -289,6 +294,7 @@ class SerialeList{
         table.appendChild(status);
     }
 
+    // Function that makes episodes buttons work
     episodeUpDown(){
         const buttonUp = document.getElementById(`user-episodes-up-${this.id}`);
         const buttonDown = document.getElementById(`user-episodes-down-${this.id}`);
@@ -310,6 +316,7 @@ class SerialeList{
         })
     }
 
+    // Function that makes seasons buttons work
     seasonUpDown(){
         const seasonUp = document.getElementById(`user-seasons-up-${this.id}`);
         const seasonDown = document.getElementById(`user-seasons-down-${this.id}`);
@@ -332,6 +339,9 @@ class SerialeList{
         })
     }
 
+
+    // Functions to update certain values in local storage and in storage array - I tried to make it into one, single function, but couldn't really get it to work so I had to make few of those
+
     updateSeasons(id, changeValue){
         const data = JSON.parse(localStorage.getItem('seriale'));
         const filter = data.filter(element => element.id === id);
@@ -342,7 +352,6 @@ class SerialeList{
         localStorage.setItem('seriale', JSON.stringify(serialeMemory));
         
     }
-
     updateEpisodes(id, changeValue){
         const data = JSON.parse(localStorage.getItem('seriale'));
         const filter = data.filter(element => element.id === id);
@@ -353,7 +362,6 @@ class SerialeList{
         localStorage.setItem('seriale', JSON.stringify(serialeMemory));
         
     }
-
     updateStatus(id, changeValue){
         const data = JSON.parse(localStorage.getItem('seriale'));
         const filter = data.filter(element => element.id === id);
@@ -366,7 +374,6 @@ class SerialeList{
         }
         localStorage.setItem('seriale', JSON.stringify(serialeMemory));
     }
-
     updateScore(id, changeValue){
         const data = JSON.parse(localStorage.getItem('seriale'));
         const filter = data.filter(element => element.id === id);
@@ -380,6 +387,3 @@ class SerialeList{
         localStorage.setItem('seriale', JSON.stringify(serialeMemory));
     }
 }
-
-
-
