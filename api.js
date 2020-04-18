@@ -1,6 +1,6 @@
 class Seriale{
     constructor(){
-        this.url = "http://api.tvmaze.com/";
+        this.url = "https://api.tvmaze.com/";
     }
 
     async search(serial){
